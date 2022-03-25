@@ -20,7 +20,6 @@ import java.util.Properties;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 
 import com.jkoolcloud.tnt4j.core.ActivityStatus;
 import com.jkoolcloud.tnt4j.core.OpLevel;
@@ -77,7 +76,7 @@ public class Log4JEventSink extends AbstractEventSink {
 
 	@Override
 	protected void _log(TrackingActivity activity) {
-		Priority level = getL4JLevel(activity.getSeverity());
+		Level level = getL4JLevel(activity.getSeverity());
 		Throwable ex = activity.getThrowable();
 		logger.log(level, getEventFormatter().format(activity), ex);
 	}
