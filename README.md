@@ -1,6 +1,6 @@
-# tnt4j-log4j12
+# tnt4j-log4j
 
-Log4J 1.2 Appender for TNT4J
+Log4J Appender for TNT4J
 
 ### LOG4J Appender
 
@@ -84,13 +84,13 @@ java -Dlog4j.configuration=config/log4j.properties -Dtnt4j.config=config/tnt4j.p
 See `<timestamp>.log` and `<vmid>.dump` file for output produced by `com.jkoolcloud.tnt4j.examples.TNT4JTest`. See `config/tnt4j.properties`
 for TNT4J configuration: factories, formatters, listeners, etc. See Wiki for more information.
 
-How to Build tnt4j-log4j12
+How to Build tnt4j-log4j
 =========================================
 Requirements
 
 * JDK 1.8+
 
-TNT4J-LOG4J12 depends on the following external packages:
+TNT4J-LOG4J depends on the following external packages:
 
 * [TNT4J-API](http://nastel.github.io/TNT4J/)
 * ~~_[Apache Log4J 1.2.17](http://logging.apache.org/log4j/1.2/)_~~ (**Deprecated** changed to `relaod4j`)
@@ -98,6 +98,6 @@ TNT4J-LOG4J12 depends on the following external packages:
 
 Please use JCenter or Maven and these dependencies will be downloaded automatically.
 
-tnt4j-log4j12 requires TNT4J. You will therefore need to point TNT4J to it's property file via the -Dtnt4j.config argument. This property
+tnt4j-log4j requires TNT4J. You will therefore need to point TNT4J to it's property file via the -Dtnt4j.config argument. This property
 file is located here in GitHub under the /config directory. If using JCenter or Maven, it can be found in the zip assembly along with the
 source code and javadoc.

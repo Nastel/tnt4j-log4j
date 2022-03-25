@@ -1,4 +1,4 @@
-<project name="tnt4j-log4j12" default="all" basedir=".">
+<project name="tnt4j-log4j" default="all" basedir=".">
 
     <echo message="Processing ${ant.project.name}${line.separator}" level="info"/>
 

@@ -19,13 +19,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jkoolcloud.tnt4j.logger</groupId>
-    <artifactId>tnt4j-log4j12</artifactId>
-    <version>0.3.4</version>
+    <artifactId>tnt4j-log4j</artifactId>
+    <version>0.3.5</version>
     <packaging>jar</packaging>
 
-    <name>tnt4j-log4j12</name>
-    <url>https://github.com/Nastel/tnt4j-log4j12</url>
-    <description>Log4j 1.2 Appender over TNT4J API</description>
+    <name>tnt4j-log4j</name>
+    <url>https://github.com/Nastel/tnt4j-log4j</url>
+    <description>Log4j Appender over TNT4J API</description>
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
@@ -45,9 +45,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git://github.com/Nastel/tnt4j-log4j12</connection>
-        <developerConnection>scm:git:git//github.com/Nastel/tnt4j-log4j12</developerConnection>
-        <url>https://github.com/Nastel/tnt4j-log4j12</url>
+        <connection>scm:git:git://github.com/Nastel/tnt4j-log4j</connection>
+        <developerConnection>scm:git:git//github.com/Nastel/tnt4j-log4j</developerConnection>
+        <url>https://github.com/Nastel/tnt4j-log4j</url>
     </scm>
     <distributionManagement>
         <repository>

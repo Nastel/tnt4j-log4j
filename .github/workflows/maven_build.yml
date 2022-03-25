@@ -55,12 +55,12 @@ jobs:
   #    if: ${{ contains(needs.build.outputs.pom-version, 'SNAPSHOT') }}
   #
   #    steps:
-  #      - name: Remove tnt4j-log4j12 package assets
+  #      - name: Remove tnt4j-log4j package assets
   #        uses: abrkn/delete-old-github-package-versions@v1
   #        with:
   #          token: ${{ secrets.GITHUB_TOKEN }}
   #          owner: Nastel
-  #          packageName: com.jkoolcloud.tnt4j-log4j12
+  #          packageName: com.jkoolcloud.tnt4j-log4j
   #          minAge: 30s
   #        continue-on-error: true
 
