@@ -30,12 +30,7 @@ import com.jkoolcloud.tnt4j.TrackingLogger;
 import com.jkoolcloud.tnt4j.config.ConfigFactory;
 import com.jkoolcloud.tnt4j.config.DefaultConfigFactory;
 import com.jkoolcloud.tnt4j.config.TrackerConfig;
-import com.jkoolcloud.tnt4j.core.ActivityStatus;
-import com.jkoolcloud.tnt4j.core.OpCompCode;
-import com.jkoolcloud.tnt4j.core.OpLevel;
-import com.jkoolcloud.tnt4j.core.OpType;
-import com.jkoolcloud.tnt4j.core.Snapshot;
-import com.jkoolcloud.tnt4j.core.ValueTypes;
+import com.jkoolcloud.tnt4j.core.*;
 import com.jkoolcloud.tnt4j.logger.AppenderConstants;
 import com.jkoolcloud.tnt4j.logger.AppenderTools;
 import com.jkoolcloud.tnt4j.source.SourceType;
@@ -490,10 +485,6 @@ public class TNT4JAppender extends AppenderSkeleton implements AppenderConstants
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 */
 	@Override
 	protected void append(LoggingEvent event) {
 		long lastReport = System.currentTimeMillis();
@@ -502,7 +493,7 @@ public class TNT4JAppender extends AppenderSkeleton implements AppenderConstants
 		ThrowableInformation ti = event.getThrowableInformation();
 		Throwable ex = ti != null ? ti.getThrowable() : null;
 
-		HashMap<String, String> attrs = new HashMap<String, String>();
+		HashMap<String, String> attrs = new HashMap<>();
 		AppenderTools.parseEventMessage(attrs, eventMsg, '#');
 
 		boolean activityMessage = AppenderTools.isActivityInstruction(attrs);
@@ -582,7 +573,8 @@ public class TNT4JAppender extends AppenderSkeleton implements AppenderConstants
 		event.getOperation().setSeverity(level);
 		event.setTag(jev.getThreadName());
 		event.getOperation().setResource(jev.getLoggerName());
-		event.setLocation(jev.getLocationInformation().getFileName() + ":" + jev.getLocationInformation().getLineNumber());
+		event.setLocation(
+				jev.getLocationInformation().getFileName() + ":" + jev.getLocationInformation().getLineNumber());
 		event.setSource(logger.getConfiguration().getSourceFactory().newSource(jev.getLoggerName()));
 
 		for (Map.Entry<String, String> entry : attrs.entrySet()) {
@@ -693,10 +685,6 @@ public class TNT4JAppender extends AppenderSkeleton implements AppenderConstants
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 */
 	@Override
 	public void close() {
 		if (logger != null) {
@@ -704,10 +692,6 @@ public class TNT4JAppender extends AppenderSkeleton implements AppenderConstants
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 */
 	@Override
 	public boolean requiresLayout() {
 		return false;

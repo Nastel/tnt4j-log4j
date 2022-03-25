@@ -118,7 +118,7 @@ public class TNT4JTest {
 		end.setParentId(activity);
 		tlogger.tnt(end);
 
-		for (StackTraceElement stack[] : TrackingLogger.getAllTrackerStackTrace()) {
+		for (StackTraceElement[] stack : TrackingLogger.getAllTrackerStackTrace()) {
 			Utils.printStackTrace("Tracker stack trace", stack, System.out);
 		}
 
@@ -203,7 +203,7 @@ class MyActivityHandler implements ActivityListener {
 
 	@Override
 	public void stopped(Activity activity) {
-		// post processing of activity: enrich activity with application metrics
+		// post-processing of activity: enrich activity with application metrics
 		PropertySnapshot snapshot = new PropertySnapshot("TestApp", "APPL_METRICS");
 		snapshot.add("appl.activity.count", TNT4JTest.activityCount);
 		snapshot.add("appl.event.count", TNT4JTest.eventCount);

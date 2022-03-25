@@ -64,7 +64,6 @@ public class Log4JEventSink extends AbstractEventSink {
 	 *            java properties used by the event sink
 	 * @param frmt
 	 *            event formatter used to format event entries
-	 *
 	 */
 	public Log4JEventSink(String name, Properties props, EventFormatter frmt) {
 		super(name, frmt);
