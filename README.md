@@ -2,6 +2,14 @@
 
 Log4J Appender for TNT4J
 
+-----------------------
+
+**NOTE:** `tnt4j-log4j` version `0.4.0` migrated from `log4j` version `1.x` to `2.x` API.
+
+Latest `log4j` `1.x` compliant `tnt4j-log4j` version is `0.3.5`.
+
+-----------------------
+
 ### LOG4J Appender
 
 All LOG4J messages can be routed to TNt4J event sinks via `TNT4JAppender` for Log4J, which allows developers to send event messages to
