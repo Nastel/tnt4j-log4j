@@ -1,6 +1,6 @@
 # tnt4j-log4j
 
-Log4J Appender for TNT4J
+Log4J Appender for TNT4J.
 
 -----------------------
 
