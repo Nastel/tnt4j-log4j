@@ -15,7 +15,7 @@
  */
 
 /**
- * Log4J sample applications to test/verify TNT4J-LOG4J Appender.
+ * Log4j sample applications to test/verify TNT4J-LOG4J Appender.
  */
 
 package com.jkoolcloud.tnt4j.examples;

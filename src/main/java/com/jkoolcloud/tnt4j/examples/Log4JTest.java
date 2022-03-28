@@ -15,14 +15,15 @@
  */
 package com.jkoolcloud.tnt4j.examples;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.MDC;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 
 public class Log4JTest {
-	private static final Logger logger = Logger.getLogger(Log4JTest.class);
+	private static final Logger logger = LogManager.getLogger(Log4JTest.class);
 
 	public static void main(String[] args) {
-		MDC.put("app", Log4JTest.class.getName());
+		ThreadContext.put("app", Log4JTest.class.getName());
 		logger.info("Starting a tnt4j activity #beg=Test");
 		logger.warn("First log message #app=" + Log4JTest.class.getName() + " #msg='1 Test warning message'");
 		logger.error("Second log message #app=" + Log4JTest.class.getName() + " #msg='2 Test error message'",

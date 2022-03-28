@@ -72,7 +72,7 @@ Running Samples
 * Simple TNT4J Sample application (`com.jkoolcloud.tnt4j.examples.TNT4JTest`):
 
 ```java	
-java -Dlog4j.configuration=config/log4j.properties -Dtnt4j.config=config/tnt4j.properties -Dtnt4j.token.repository=config/tnt4j-tokens.properties  -Dtnt4j.dump.on.vm.shutdown=true -Dtnt4j.dump.provider.default=true -Dtnt4j.formatter.json.newline=true -classpath "./lib/*" com.jkoolcloud.tnt4j.examples.TNT4JTest com.myco.TestApp MYSERVER "Test log message" correlator1 "TestCommand"  TestLocation
+java -Dlog4j2.configurationFile=file:config/log4j2.xml -Dtnt4j.config=config/tnt4j.properties -Dtnt4j.token.repository=config/tnt4j-tokens.properties  -Dtnt4j.dump.on.vm.shutdown=true -Dtnt4j.dump.provider.default=true -Dtnt4j.formatter.json.newline=true -classpath "./lib/*" com.jkoolcloud.tnt4j.examples.TNT4JTest com.myco.TestApp MYSERVER "Test log message" correlator1 "TestCommand"  TestLocation
 ```
 
 **Command line arguments:**
@@ -93,8 +93,7 @@ Requirements
 TNT4J-LOG4J depends on the following external packages:
 
 * [TNT4J-API](http://nastel.github.io/TNT4J/)
-* ~~_[Apache Log4J 1.2.17](http://logging.apache.org/log4j/1.2/)_~~ (**Deprecated** changed to `relaod4j`)
-* [reload4j 1.2.x](https://reload4j.qos.ch/)
+* [Apache Log4J 2.x](https://logging.apache.org/log4j/2.x/)
 
 Please use JCenter or Maven and these dependencies will be downloaded automatically.
 

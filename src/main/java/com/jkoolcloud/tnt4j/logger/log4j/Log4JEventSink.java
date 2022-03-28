@@ -18,19 +18,14 @@ package com.jkoolcloud.tnt4j.logger.log4j;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import com.jkoolcloud.tnt4j.core.ActivityStatus;
 import com.jkoolcloud.tnt4j.core.OpLevel;
 import com.jkoolcloud.tnt4j.core.OpType;
-import com.jkoolcloud.tnt4j.core.Snapshot;
 import com.jkoolcloud.tnt4j.format.EventFormatter;
-import com.jkoolcloud.tnt4j.sink.AbstractEventSink;
-import com.jkoolcloud.tnt4j.source.Source;
-import com.jkoolcloud.tnt4j.tracker.TrackingActivity;
-import com.jkoolcloud.tnt4j.tracker.TrackingEvent;
-import com.jkoolcloud.tnt4j.utils.Utils;
+import com.jkoolcloud.tnt4j.sink.impl.LoggerEventSink;
 
 /**
  * <p>
@@ -38,19 +33,15 @@ import com.jkoolcloud.tnt4j.utils.Utils;
  * designed to log messages to log4j framework.
  * </p>
  *
+ * @version $Revision: 12 $
  *
- * @see TrackingEvent
- * @see EventFormatter
- * @see OpLevel
- *
- * @version $Revision: 11 $
- *
+ * @see com.jkoolcloud.tnt4j.format.EventFormatter
+ * @see com.jkoolcloud.tnt4j.core.OpLevel
+ * @see com.jkoolcloud.tnt4j.logger.log4j.Log4JEventSinkFactory
  */
-public class Log4JEventSink extends AbstractEventSink {
+public class Log4JEventSink extends LoggerEventSink {
 	private static final String[] log4JSevMap = { "INFO", "TRACE", "DEBUG", "INFO", "WARN", "WARN", "ERROR", "FATAL",
 			"FATAL", "FATAL", "FATAL" };
-
-	private static final String[] log4JStatusMap = { "INFO", "INFO", "INFO", "ERROR" };
 
 	private Logger logger = null;
 
@@ -70,66 +61,10 @@ public class Log4JEventSink extends AbstractEventSink {
 	}
 
 	@Override
-	protected void _log(TrackingEvent event) {
-		logger.log(getL4JLevel(event), getEventFormatter().format(event), event.getOperation().getThrowable());
-	}
+	public boolean isSet(OpLevel sev) {
+		_checkState();
 
-	@Override
-	protected void _log(TrackingActivity activity) {
-		Level level = getL4JLevel(activity.getSeverity());
-		Throwable ex = activity.getThrowable();
-		logger.log(level, getEventFormatter().format(activity), ex);
-	}
-
-	@Override
-	protected void _log(Snapshot snapshot) {
-		logger.log(getL4JLevel(snapshot.getSeverity()), getEventFormatter().format(snapshot));
-	}
-
-	@Override
-	protected void _log(long ttl, Source src, OpLevel sev, String msg, Object... args) {
-		logger.log(getL4JLevel(sev), getEventFormatter().format(ttl, src, sev, msg, args), Utils.getThrowable(args));
-	}
-
-	@Override
-	protected void _write(Object msg, Object... args) throws IOException {
-		logger.info(getEventFormatter().format(msg, args));
-	}
-
-	/**
-	 * Maps {@link com.jkoolcloud.tnt4j.tracker.TrackingEvent} severity to log4j Level.
-	 *
-	 * @param ev
-	 *            application tracking event
-	 * @return log4j level
-	 * @see OpType
-	 */
-	public Level getL4JLevel(TrackingEvent ev) {
-		return getL4JLevel(ev.getSeverity());
-	}
-
-	/**
-	 * Maps {@link com.jkoolcloud.tnt4j.core.ActivityStatus} severity to log4j Level.
-	 *
-	 * @param status
-	 *            application activity status
-	 * @return log4j level
-	 * @see ActivityStatus
-	 */
-	public Level getL4JLevel(ActivityStatus status) {
-		return Level.toLevel(log4JStatusMap[status.ordinal()], Level.INFO);
-	}
-
-	/**
-	 * Maps {@link com.jkoolcloud.tnt4j.core.OpLevel} severity to log4j Level.
-	 *
-	 * @param sev
-	 *            severity level
-	 * @return log4j level
-	 * @see OpType
-	 */
-	public Level getL4JLevel(OpLevel sev) {
-		return Level.toLevel(log4JSevMap[sev.ordinal()], Level.INFO);
+		return logger.isEnabled(getLevel(sev));
 	}
 
 	@Override
@@ -145,7 +80,7 @@ public class Log4JEventSink extends AbstractEventSink {
 	@Override
 	protected synchronized void _open() {
 		if (logger == null) {
-			logger = Logger.getLogger(getName());
+			logger = LogManager.getLogger(getName());
 		}
 	}
 
@@ -154,7 +89,30 @@ public class Log4JEventSink extends AbstractEventSink {
 	}
 
 	@Override
-	public boolean isSet(OpLevel sev) {
-		return logger.isEnabledFor(getL4JLevel(sev));
+	protected void writeLine(OpLevel sev, LogEntry entry, Throwable t) {
+		if (!isSet(sev)) {
+			return;
+		}
+
+		Level level = getLevel(sev);
+		if (!logger.isEnabled(level)) {
+			return;
+		}
+
+		String msg = entry.getString();
+		incrementBytesSent(msg.length());
+		logger.log(level, msg, t);
+	}
+
+	/**
+	 * Maps {@link com.jkoolcloud.tnt4j.core.OpLevel} severity to log4j Level.
+	 *
+	 * @param sev
+	 *            severity level
+	 * @return log4j level
+	 * @see OpType
+	 */
+	public Level getLevel(OpLevel sev) {
+		return Level.toLevel(log4JSevMap[sev.ordinal()], Level.INFO);
 	}
 }

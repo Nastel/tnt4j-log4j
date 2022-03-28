@@ -18,7 +18,8 @@ package com.jkoolcloud.tnt4j.examples;
 import java.util.Date;
 import java.util.Random;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.jkoolcloud.tnt4j.TrackingLogger;
 import com.jkoolcloud.tnt4j.config.DefaultConfigFactory;
@@ -48,7 +49,8 @@ import com.jkoolcloud.tnt4j.utils.Utils;
  * @see TrackingEvent
  */
 public class TNT4JTest {
-	private static final Logger logger = Logger.getLogger(TNT4JTest.class);
+	private static final Logger logger = LogManager.getLogger(TNT4JTest.class);
+
 	private static final Random rand = new Random(System.currentTimeMillis());
 	protected static int activityCount = 0, eventCount = 0;
 
