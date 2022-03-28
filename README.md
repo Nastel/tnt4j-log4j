@@ -4,7 +4,7 @@ Log4J Appender for TNT4J
 
 -----------------------
 
-**NOTE:** `tnt4j-log4j` version `0.4.0` migrated from `log4j` version `1.x` to `2.x` API.
+**NOTE:** `tnt4j-log4j` version `0.4.0` migrated `log4j` API from version `1.x` to `2.x`.
 
 Latest `log4j` `1.x` compliant `tnt4j-log4j` version is `0.3.5`.
 
