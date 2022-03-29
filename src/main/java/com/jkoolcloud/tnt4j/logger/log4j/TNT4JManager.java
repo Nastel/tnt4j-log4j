@@ -127,7 +127,7 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 			logger = TrackingLogger.getInstance(config.build());
 			logger.open();
 		} catch (Throwable e) {
-			LOGGER.error(
+			logError(
 					"Unable to create tracker instance=" + getName() + ", config.factory=" + cFactory + ", source.name="
 							+ sourceName + ", source.type=" + sourceType + ", snapshot.category=" + snapCategory,
 					e);
@@ -144,12 +144,25 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	}
 
 	/**
+	 * Checks if logger is initialized.
+	 * 
+	 * @return {@code true} if logger is not {@code null}, {@code false} - otherwise
+	 */
+	protected boolean isReady() {
+		return logger != null;
+	}
+
+	/**
 	 * Report single log event.
 	 * 
 	 * @param event
 	 *            log event to report
 	 */
 	public void tnt(LogEvent event) {
+		if (!isReady()) {
+			return;
+		}
+
 		long lastReport = System.currentTimeMillis();
 
 		Message msg = event.getMessage();
@@ -464,17 +477,18 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	/**
 	 * Return whether appender generates metrics log entries with exception
 	 *
-	 * @return true to publish default jvm metrics when exception is logged
+	 * @return {@code true} to publish default jvm metrics when exception is logged
 	 */
 	public boolean getMetricsOnException() {
 		return metricsOnException;
 	}
 
 	/**
-	 * Direct appender to generate metrics log entries with exception when set to true, false otherwise.
+	 * Direct appender to generate metrics log entries with exception when set to {@code true}, {@code false} -
+	 * otherwise.
 	 *
 	 * @param flag
-	 *            true to append metrics on exception, false otherwise
+	 *            {@code true} to append metrics on exception, {@code false} - otherwise
 	 */
 	public void setMetricsOnException(boolean flag) {
 		metricsOnException = flag;
