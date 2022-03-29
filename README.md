@@ -63,16 +63,16 @@ snapshot name set to activity name set by `#beg`, `#end`, `#opn` tags.
 
 Below is a sample log4j appender configuration:
 
+```xml
+<!-- ### Default TNT4J Appender configuration ### -->
+<Tnt4j name="tnt4j" sourceName="com.log4j.Test" sourceType="APPL" metricsOnException="true" metricsFrequency="60">
+    <PatternLayout>
+        <Pattern>%d{ABSOLUTE} %-5p [%c{1}] %m%n</Pattern>
+    </PatternLayout>
+</Tnt4j>
 ```
-### Default TNT4J Appender configuration
-log4j.appender.tnt4j=com.jkoolcloud.tnt4j.logger.log4j.TNT4JAppender
-log4j.appender.tnt4j.SourceName=com.log4j.Test
-log4j.appender.tnt4j.SourceType=APPL
-log4j.appender.tnt4j.MetricsOnException=true
-log4j.appender.tnt4j.MetricsFrequency=60
-log4j.appender.tnt4j.layout=org.apache.log4j.EnhancedPatternLayout
-log4j.appender.tnt4j.layout.ConversionPattern=%d{ABSOLUTE} %-5p [%c{1}] %m%n
-```
+
+See [log4j2.xml](config/log4j2.xml) for more detailed sample of appenders and loggers configuration.
 
 Running Samples
 ===============================================
