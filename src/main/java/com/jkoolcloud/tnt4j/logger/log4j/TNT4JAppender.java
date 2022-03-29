@@ -351,6 +351,9 @@ public class TNT4JAppender extends AbstractAppender {
 	}
 
 	/**
+	 * @param <B>
+	 *            type of builder instance
+	 * 
 	 * @return a builder for a TNT4JAppender.
 	 */
 	@PluginBuilderFactory
