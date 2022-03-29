@@ -20,11 +20,13 @@
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config">
     <Appenders>
+        <!-- ### Default TNT4J Appender configuration ### -->
         <Tnt4j name="tnt4j" sourceName="com.log4j.Test" sourceType="APPL" metricsOnException="true" metricsFrequency="60">
             <PatternLayout>
                 <Pattern>%d{ABSOLUTE} %-5p [%c{1}] %m%n</Pattern>
             </PatternLayout>
         </Tnt4j>
+        <!-- ### Default LOG4J properties used by Log4JEventSink implementation ### -->
         <File name="logfile" fileName="tnt4j-event.log" append="true">
             <PatternLayout>
                 <Pattern>%d{ABSOLUTE} %-5p [%c{1}] %m%n</Pattern>
@@ -36,10 +38,10 @@
             <AppenderRef ref="tnt4j"/>
         </Logger>
         <Logger name="com.jkoolcloud.tnt4j.examples" level="TRACE">
-            <AppenderRef ref="logFile"/>
+            <AppenderRef ref="logfile"/>
         </Logger>
         <Logger name="org" level="INFO">
-            <AppenderRef ref="logFile"/>
+            <AppenderRef ref="logfile"/>
         </Logger>
     </Loggers>
 </Configuration>
