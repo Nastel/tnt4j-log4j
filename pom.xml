@@ -20,7 +20,7 @@
 
     <groupId>com.jkoolcloud.tnt4j.logger</groupId>
     <artifactId>tnt4j-log4j</artifactId>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
     <packaging>jar</packaging>
 
     <name>tnt4j-log4j</name>
