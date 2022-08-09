@@ -240,23 +240,40 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${release.deploy.dir}</directory>
-                            <includes>
-                                <include>${release.deploy.finalName}/</include>
-                                <include>${release.deploy.finalName}.*</include>
-                            </includes>
-                        </fileset>
-                    </filesets>
-                </configuration>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>clean-target</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>clean-build</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${assembly.skipAssembly}</skip>
+                            <filesets>
+                                <fileset>
+                                    <directory>${release.deploy.dir}</directory>
+                                    <includes>
+                                        <include>${release.deploy.finalName}/</include>
+                                        <include>${release.deploy.finalName}.*</include>
+                                    </includes>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.2</version>
                 <configuration>
                     <archive>
                         <!--<index>true</index>-->
@@ -267,6 +284,8 @@
                             <Implementation-Vendor>${product.vendor}</Implementation-Vendor>
                             <Implementation-Title>${project.name}</Implementation-Title>
                             <Implementation-Version>${project.version}-${maven.build.timestamp}</Implementation-Version>
+                            <X-Compile-Source-JDK>${java.source.version}</X-Compile-Source-JDK>
+                            <X-Compile-Target-JDK>${java.target.version}</X-Compile-Target-JDK>
                         </manifestEntries>
                     </archive>
                 </configuration>
