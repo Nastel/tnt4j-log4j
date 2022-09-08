@@ -224,7 +224,7 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	 * @param attrs
 	 *            a set of name/value pairs
 	 * @param activity
-	 *            tnt4j activity associated with current message
+	 *            TNT4J activity associated with current message
 	 * @param jev
 	 *            log4j logging event object
 	 * @param eventMsg
@@ -232,7 +232,7 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	 * @param ex
 	 *            exception associated with this event
 	 *
-	 * @return tnt4j tracking event object
+	 * @return TNT4J tracking event object
 	 */
 	private TrackingEvent processEventMessage(Map<String, String> attrs, TrackingActivity activity, LogEvent jev,
 			String eventMsg, Throwable ex) {
@@ -388,7 +388,7 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	/**
 	 * Obtain snapshot category associated with this appender. This name is used for reporting user defined metrics
 	 *
-	 * @return snapshot category name string that maps to tnt4j snapshot category
+	 * @return snapshot category name string that maps to TNT4J snapshot category
 	 */
 	public String getSnapshotCategory() {
 		return snapCategory;
@@ -405,16 +405,16 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	}
 
 	/**
-	 * Obtain source name associated with this appender. This name is used tnt4j source for loading tnt4j configuration.
+	 * Obtain source name associated with this appender. This name is used TNT4J source for loading TNT4J configuration.
 	 *
-	 * @return source name string that maps to tnt4j configuration
+	 * @return source name string that maps to TNT4J configuration
 	 */
 	public String getSourceName() {
 		return sourceName;
 	}
 
 	/**
-	 * Set source name associated with this appender. This name is used tnt4j source for loading tnt4j configuration.
+	 * Set source name associated with this appender. This name is used TNT4J source for loading TNT4J configuration.
 	 *
 	 * @param name
 	 *            source name
@@ -458,7 +458,7 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	/**
 	 * Obtain maximum size of any activity
 	 *
-	 * @return source name string that maps to tnt4j configuration
+	 * @return source name string that maps to TNT4J configuration
 	 */
 	public int getMaxActivitySize() {
 		return maxActivitySize;

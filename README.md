@@ -12,17 +12,17 @@ Latest `log4j` `1.x` compliant `tnt4j-log4j` version is `0.3.5`.
 
 ### LOG4J Appender
 
-All LOG4J messages can be routed to TNt4J event sinks via `TNT4JAppender` for Log4J, which allows developers to send event messages to
+All LOG4J messages can be routed to TNT4J event sinks via `TNT4JAppender` for Log4J, which allows developers to send event messages to
 TNT4J.
 
 Developers may also enrich event messages and pass context to TNT4J using hashtag enrichment scheme. Hashtags are used to decorate event
 messages with important metadata about each log message. This metadata is used to generate TNT4J tracking events:
 
 ```java
-logger.info("Starting a tnt4j activity #beg=Test, #app="+Log4JTest.class.getName());
+logger.info("Starting a TNT4J activity #beg=Test, #app="+Log4JTest.class.getName());
 logger.warn("First log message #app="+Log4JTest.class.getName()+", #msg='1 Test warning message'");
 logger.error("Second log message #app="+Log4JTest.class.getName()+", #msg='2 Test error message'",new Exception("test exception"));
-logger.info("Ending a tnt4j activity #end=Test, #app="+Log4JTest.class.getName()+" #%i/order-no="+orderNo+" #%d:currency/amount="+amount);
+logger.info("Ending a TNT4J activity #end=Test, #app="+Log4JTest.class.getName()+" #%i/order-no="+orderNo+" #%d:currency/amount="+amount);
 ```
 
 Above example groups messages between first and last into a related logical collection called `Activity`. Activity is a collection of

@@ -24,11 +24,11 @@ public class Log4JTest {
 
 	public static void main(String[] args) {
 		ThreadContext.put("app", Log4JTest.class.getName());
-		logger.info("Starting a tnt4j activity #beg=Test");
+		logger.info("Starting a TNT4J activity #beg=Test");
 		logger.warn("First log message #app=" + Log4JTest.class.getName() + " #msg='1 Test warning message'");
 		logger.error("Second log message #app=" + Log4JTest.class.getName() + " #msg='2 Test error message'",
 				new Exception("test exception"));
-		logger.info("Ending a tnt4j activity #end= #app=" + Log4JTest.class.getName());
+		logger.info("Ending a TNT4J activity #end= #app=" + Log4JTest.class.getName());
 
 		logger.debug("First datagram message #app=" + Log4JTest.class.getName() + " #msg='Test datagram message'");
 		logger.trace("Second datagram message #app=" + Log4JTest.class.getName() + " #msg='Test datagram message'");

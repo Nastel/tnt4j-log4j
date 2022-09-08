@@ -34,12 +34,12 @@ import com.jkoolcloud.tnt4j.source.SourceType;
 
 /**
  * <p>
- * Log4j appender for sending log4j events to TNT4j logging framework.
+ * Log4j appender for sending log4j events to TNT4J logging framework.
  * </p>
  *
  * <p>
  * This appender will extract information from the log4j {@code LoggingEvent} and construct the appropriate message for
- * sending to TNT4j.
+ * sending to TNT4J.
  * </p>
  *
  * <p>
@@ -50,7 +50,7 @@ import com.jkoolcloud.tnt4j.source.SourceType;
  * <li>This appender does not require a layout.</li>
  * <li>TNT4J hash tags can be passed using log4j messages (using {@code #tag=value} convention) as well as
  * {@code MDC}.</li>
- * <li>All messages logged to this appender will be sent to all defined sinks as configured by tnt4j configuration.</li>
+ * <li>All messages logged to this appender will be sent to all defined sinks as configured by TNT4J configuration.</li>
  *
  * </ul>
  *
@@ -60,7 +60,7 @@ import com.jkoolcloud.tnt4j.source.SourceType;
  * <table summary="" cellspacing=10>
  * <tr>
  * <td valign=top><b>SourceName</b></td>
- * <td valign=top>source name associated with the appender matching tnt4j configuration</td>
+ * <td valign=top>source name associated with the appender matching TNT4J configuration</td>
  * </tr>
  * <tr>
  * <td valign=top><b>SourceType</b></td>
@@ -85,12 +85,12 @@ import com.jkoolcloud.tnt4j.source.SourceType;
  * </table>
  *
  * <p>
- * This appender by default sets the following TNT4j Activity and Event parameters based on the information in the log4j
+ * This appender by default sets the following TNT4J Activity and Event parameters based on the information in the log4j
  * event, as follows:
  * </p>
  * <table summary="" cellspacing=10>
  * <tr>
- * <td valign=top><b>TNT4j Parameter</b></td>
+ * <td valign=top><b>TNT4J Parameter</b></td>
  * <td valign=top><b>Log4j Event field</b></td>
  * </tr>
  * <tr>
@@ -120,7 +120,7 @@ import com.jkoolcloud.tnt4j.source.SourceType;
  * </table>
  *
  * <p>
- * In addition, it will set other TNT4j Activity and Event parameters based on the local environment. These default
+ * In addition, it will set other TNT4J Activity and Event parameters based on the local environment. These default
  * parameter values can be overridden by annotating the log event messages or passing them using {@code MDC}.
  *
  * <p>
