@@ -12,8 +12,8 @@ Latest `log4j` `1.x` compliant `tnt4j-log4j` version is `0.3.5`.
 
 ### LOG4J Appender
 
-All LOG4J messages can be routed to TNT4J event sinks via `TNT4JAppender` for Log4J, which allows developers to send event messages to
-TNT4J.
+All LOG4J messages can be routed to TNT4J event sinks via `com.jkoolcloud.tnt4j.logger.log4j.TNT4JAppender`, which allows developers to send 
+event messages to TNT4J.
 
 Developers may also enrich event messages and pass context to TNT4J using hashtag enrichment scheme. Hashtags are used to decorate event
 messages with important metadata about each log message. This metadata is used to generate TNT4J tracking events:
@@ -61,7 +61,7 @@ Not specifying a qualifier defaults to auto-detection of type by `TNT4JAppender`
 to `string` if the test fails (e.g. `#order-no=62627`). User defined fields are reported as a TNT4J snapshot with `Log4j` category and
 snapshot name set to activity name set by `#beg`, `#end`, `#opn` tags.
 
-Below is a sample log4j appender configuration:
+Below is a sample LOG4J appender configuration:
 
 ```xml
 <!-- ### Default TNT4J Appender configuration ### -->
@@ -89,8 +89,11 @@ java -Dlog4j2.configurationFile=file:config/log4j2.xml -Dtnt4j.config=config/tnt
 * `-Dtnt4j.dump.provider.default=true` java property registers all default dump providers (memory, stack, logging stats).
 * `-Dtnt4j.formatter.json.newline=true` java property directs `JSONFormatter` to append new line when formatting log entries.
 
-See `<timestamp>.log` and `<vmid>.dump` file for output produced by `com.jkoolcloud.tnt4j.examples.TNT4JTest`. See `config/tnt4j.properties`
-for TNT4J configuration: factories, formatters, listeners, etc. See Wiki for more information.
+See `<timestamp>.log` and `<vmid>.dump` file for output produced by `com.jkoolcloud.tnt4j.examples.TNT4JTest`.
+
+See `config/tnt4j.properties` for TNT4J configuration: factories, formatters, listeners, etc.
+
+See Wiki for more information.
 
 How to Build tnt4j-log4j
 =========================================
@@ -98,13 +101,13 @@ Requirements
 
 * JDK 1.8+
 
-TNT4J-LOG4J depends on the following external packages:
+`tnt4j-log4j` depends on the following external packages:
 
 * [TNT4J-API](http://nastel.github.io/TNT4J/)
 * [Apache Log4J 2.x](https://logging.apache.org/log4j/2.x/)
 
 Please use JCenter or Maven and these dependencies will be downloaded automatically.
 
-tnt4j-log4j requires TNT4J. You will therefore need to point TNT4J to it's property file via the -Dtnt4j.config argument. This property
+`tnt4j-log4j` requires TNT4J. You will therefore need to point TNT4J to it's property file via the `-Dtnt4j.config` argument. This property
 file is located here in GitHub under the /config directory. If using JCenter or Maven, it can be found in the zip assembly along with the
 source code and javadoc.
