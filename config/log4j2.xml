@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  ~ Copyright 2014-2022 JKOOL, LLC.
+  ~ Copyright 2014-2023 JKOOL, LLC.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
   ~ limitations under the License.
   -->
 
-<Configuration strict="true"
+<Configuration strict="true" shutdownHook="disable"
                xmlns="http://logging.apache.org/log4j/2.0/config"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config">
+               xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config
+                                   https://raw.githubusercontent.com/apache/logging-log4j2/main/log4j-core/src/main/resources/Log4j-config.xsd">
     <Appenders>
         <!-- ### Default TNT4J Appender configuration ### -->
         <Tnt4j name="tnt4j" sourceName="com.log4j.Test" sourceType="APPL" metricsOnException="true" metricsFrequency="60">

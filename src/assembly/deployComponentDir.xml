@@ -30,11 +30,11 @@
     <fileSets>
         <!-- user defined property files -->
         <fileSet>
-            <directory>config</directory>
+            <directory>.</directory>
             <includes>
-                <include>**/*.*</include>
+                <include>cmd.properties</include>
             </includes>
-            <outputDirectory>config</outputDirectory>
+            <outputDirectory></outputDirectory>
             <lineEnding>${assembly.line.endings}</lineEnding>
         </fileSet>
         <!-- static content -->

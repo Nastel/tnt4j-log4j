@@ -30,12 +30,12 @@
     <fileSets>
         <!-- user defined property files -->
         <fileSet>
-            <directory>config</directory>
+            <directory>.</directory>
             <includes>
-                <include>**/*.*</include>
+                <include>cmd.properties</include>
             </includes>
-            <outputDirectory>config</outputDirectory>
-            <lineEnding>${assembly.line.endings}</lineEnding>
+            <outputDirectory></outputDirectory>
+            <lineEnding>crlf</lineEnding>
         </fileSet>
         <!-- static content -->
         <fileSet>
@@ -46,7 +46,7 @@
                 <include>NOTICE*</include>
             </includes>
             <outputDirectory></outputDirectory>
-            <lineEnding>${assembly.line.endings}</lineEnding>
+            <lineEnding>crlf</lineEnding>
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}</directory>
