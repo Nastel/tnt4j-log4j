@@ -17,6 +17,7 @@ package com.jkoolcloud.tnt4j.logger.log4j;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.function.Supplier;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -89,7 +90,7 @@ public class Log4JEventSink extends LoggerEventSink {
 	}
 
 	@Override
-	protected void writeLine(OpLevel sev, LogEntry entry, Throwable t) {
+	protected void writeLine(OpLevel sev, Supplier<String> entry, Throwable t) {
 		if (!isSet(sev)) {
 			return;
 		}
@@ -99,7 +100,7 @@ public class Log4JEventSink extends LoggerEventSink {
 			return;
 		}
 
-		String msg = entry.getString();
+		String msg = entry.get();
 		incrementBytesSent(msg.length());
 		logger.log(level, msg, t);
 	}
