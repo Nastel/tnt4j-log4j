@@ -103,7 +103,7 @@ Requirements
 
 `tnt4j-log4j` depends on the following external packages:
 
-* [TNT4J-API](http://nastel.github.io/TNT4J/)
+* [TNT4J-API](https://nastel.github.io/TNT4J/)
 * [Apache Log4J 2.x](https://logging.apache.org/log4j/2.x/)
 
 Please use JCenter or Maven and these dependencies will be downloaded automatically.
