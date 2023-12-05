@@ -80,7 +80,7 @@ Running Samples
 * Simple TNT4J Sample application (`com.jkoolcloud.tnt4j.examples.TNT4JTest`):
 
 ```java	
-java -Dlog4j2.configurationFile=file:config/log4j2.xml -Dtnt4j.config=config/tnt4j.properties -Dtnt4j.token.repository=config/tnt4j-tokens.properties  -Dtnt4j.dump.on.vm.shutdown=true -Dtnt4j.dump.provider.default=true -Dtnt4j.formatter.json.newline=true -classpath "./lib/*" com.jkoolcloud.tnt4j.examples.TNT4JTest com.myco.TestApp MYSERVER "Test log message" correlator1 "TestCommand"  TestLocation
+java -Dlog4j2.configurationFile=file:./config/log4j2.xml -Dtnt4j.config=config/tnt4j.properties -Dtnt4j.token.repository=config/tnt4j-tokens.properties  -Dtnt4j.dump.on.vm.shutdown=true -Dtnt4j.dump.provider.default=true -Dtnt4j.formatter.json.newline=true -classpath "./lib/*" com.jkoolcloud.tnt4j.examples.TNT4JTest com.myco.TestApp MYSERVER "Test log message" correlator1 "TestCommand"  TestLocation
 ```
 
 **Command line arguments:**

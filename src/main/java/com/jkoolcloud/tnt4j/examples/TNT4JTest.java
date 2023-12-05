@@ -111,17 +111,16 @@ public class TNT4JTest {
 		tlogger.tnt(activity); // log and report activity
 
 		System.out.println("Logging stats: " + tlogger.getStats());
-		System.out.println("Registered loggers: size=" + TrackingLogger.getAllTrackers().size() + ", stack.size="
-				+ TrackingLogger.getAllTrackerStackTrace().size());
+		System.out.println("Registered loggers: size=" + TrackingLogger.getAllTrackers().size());
 
 		Snapshot end = tlogger.newSnapshot("End", "TNT4JTest");
 		end.add("loggers-size", TrackingLogger.getAllTrackers().size());
-		end.add("stack-size", TrackingLogger.getAllTrackerStackTrace().size());
+		end.add("stack-size", tlogger.getStackSize());
 		end.setParentId(activity);
 		tlogger.tnt(end);
 
-		for (StackTraceElement[] stack : TrackingLogger.getAllTrackerStackTrace()) {
-			Utils.printStackTrace("Tracker stack trace", stack, System.out);
+		for (TrackingLogger tl : TrackingLogger.getAllTrackers()) {
+			Utils.printStackTrace("Tracker stack trace", tl.getStackTrace(), System.out);
 		}
 
 		tlogger.close(); // deregister and release all logging resources
