@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright 2014-2023 JKOOL, LLC.
   ~
@@ -24,25 +24,25 @@
         <!-- ### Default TNT4J Appender configuration ### -->
         <Tnt4j name="tnt4j" sourceName="com.log4j.Test" sourceType="APPL" metricsOnException="true" metricsFrequency="60">
             <PatternLayout>
-                <Pattern>%d{ABSOLUTE} %-5p [%c{1}] %m%n</Pattern>
+                <Pattern>%d{ISO8601} %-5p [%t!%c{1}] - %m%n</Pattern>
             </PatternLayout>
         </Tnt4j>
         <!-- ### Default LOG4J properties used by Log4JEventSink implementation ### -->
         <File name="logfile" fileName="tnt4j-event.log" append="true">
             <PatternLayout>
-                <Pattern>%d{ABSOLUTE} %-5p [%c{1}] %m%n</Pattern>
+                <Pattern>%d{ISO8601} %-5p [%t!%c{1}] - %m%n</Pattern>
             </PatternLayout>
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.jkoolcloud.tnt4j.examples.Log4JTest" level="TRACE">
+        <AsyncLogger name="com.jkoolcloud.tnt4j.examples.Log4JTest" level="TRACE">
             <AppenderRef ref="tnt4j"/>
-        </Logger>
-        <Logger name="com.jkoolcloud.tnt4j.examples" level="TRACE">
+        </AsyncLogger>
+        <AsyncLogger name="com.jkoolcloud.tnt4j.examples" level="TRACE">
             <AppenderRef ref="logfile"/>
-        </Logger>
-        <Logger name="org" level="INFO">
+        </AsyncLogger>
+        <AsyncLogger name="org" level="INFO">
             <AppenderRef ref="logfile"/>
-        </Logger>
+        </AsyncLogger>
     </Loggers>
 </Configuration>
