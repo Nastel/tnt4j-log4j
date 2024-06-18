@@ -105,7 +105,7 @@ How to Build tnt4j-log4j
 =========================================
 Requirements
 
-* JDK 1.8+
+* JDK 11+
 
 `tnt4j-log4j` depends on the following external packages:
 
