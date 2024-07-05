@@ -23,10 +23,12 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.AbstractManager;
 import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.message.Message;
 
 import com.jkoolcloud.tnt4j.TrackingLogger;
@@ -252,11 +254,14 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 		OpLevel level = getOpLevel(jev);
 		StackTraceElement location = jev.getSource();
 		String loggerName = jev.getLoggerName();
+		if (LogManager.ROOT_LOGGER_NAME.equals(loggerName)) {
+			loggerName = LoggerConfig.ROOT;
+		}
 
 		TrackingEvent event = logger.newEvent(location == null ? UNKNOWN_VALUE : location.getMethodName(), eventMsg);
 		event.getOperation().setSeverity(level);
 		event.setTag(jev.getThreadName());
-		event.getOperation().setResource(Utils.isEmpty(loggerName) ? UNKNOWN_VALUE : loggerName);
+		event.getOperation().setResource(loggerName == null ? UNKNOWN_VALUE : loggerName);
 		if (location != null) {
 			event.setLocation(location.getFileName() + ":" + location.getLineNumber());
 		}
