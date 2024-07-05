@@ -191,10 +191,21 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 					|| ((lastReport - lastSnapshot) > (metricsFrequency * 1000)));
 
 			if (reportMetrics) {
+				String loggerName = event.getLoggerName();
+				if (loggerName == null) {
+					loggerName = UNKNOWN_VALUE;
+				} else if (LogManager.ROOT_LOGGER_NAME.equals(loggerName)) {
+					loggerName = LoggerConfig.ROOT;
+				}
+				String threadName = event.getThreadName();
+				if (Utils.isEmpty(threadName)) {
+					threadName = UNKNOWN_VALUE;
+				}
+
 				// report a single tracking event as part of an activity
-				activity = logger.newActivity(tev.getSeverity(), event.getThreadName());
+				activity = logger.newActivity(tev.getSeverity(), threadName);
 				activity.start();
-				activity.setResource(event.getLoggerName());
+				activity.setResource(loggerName);
 				activity.setSource(tev.getSource()); // use event's source name for this activity
 				activity.setException(ex);
 				activity.setStatus(ex != null ? ActivityStatus.EXCEPTION : ActivityStatus.END);
