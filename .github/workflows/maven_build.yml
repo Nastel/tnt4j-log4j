@@ -49,7 +49,6 @@ jobs:
           echo "Found project version: $VERSION"
           echo "pom-version=$VERSION" >> $GITHUB_OUTPUT
 
-
   publish-snapshot:
     needs: build
     runs-on: ubuntu-latest
