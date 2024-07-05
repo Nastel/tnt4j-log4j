@@ -50,6 +50,9 @@ import com.jkoolcloud.tnt4j.utils.Utils;
  * @see com.jkoolcloud.tnt4j.logger.log4j.TNT4JAppender
  */
 public class TNT4JManager extends AbstractManager implements AppenderConstants {
+
+	private static final String UNKNOWN_VALUE = "UNKNOWN";
+
 	private final Configuration configuration;
 
 	private TrackingLogger logger;
@@ -120,17 +123,20 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	public void startup() {
 		try {
 			if (sourceName == null) {
-				setSourceName(getName());
+				sourceName = getName();
 			}
 			TrackerConfig config = ((cProperties == null) ? cFactory.getConfig(sourceName, sourceType)
 					: cFactory.getConfig(sourceName, sourceType, cProperties));
 			logger = TrackingLogger.getInstance(config.build());
 			logger.open();
 		} catch (Throwable e) {
-			logError(
-					"Unable to create tracker instance=" + getName() + ", config.factory=" + cFactory + ", source.name="
-							+ sourceName + ", source.type=" + sourceType + ", snapshot.category=" + snapCategory,
-					e);
+			logError("Unable to create tracker" //
+					+ " instance=" + getName() //
+					+ ", config.factory=" + cFactory //
+					+ ", source.name=" + sourceName //
+					+ ", source.type=" + sourceType //
+					+ ", snapshot.category=" + snapCategory //
+					, e);
 		}
 	}
 
@@ -236,22 +242,25 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 	 */
 	private TrackingEvent processEventMessage(Map<String, String> attrs, TrackingActivity activity, LogEvent jev,
 			String eventMsg, Throwable ex) {
-		int rcode = 0;
+		int rCode = 0;
 		long elapsedTimeUsec = getUsecsSinceLastEvent();
 		long evTime = jev.getTimeMillis() * 1000; // convert to usec
 		long startTime = 0, endTime = 0;
 		Snapshot snapshot = null;
 
-		OpCompCode ccode = getOpCompCode(jev);
+		OpCompCode cCode = getOpCompCode(jev);
 		OpLevel level = getOpLevel(jev);
-
 		StackTraceElement location = jev.getSource();
-		TrackingEvent event = logger.newEvent(location.getMethodName(), eventMsg);
+		String loggerName = jev.getLoggerName();
+
+		TrackingEvent event = logger.newEvent(location == null ? UNKNOWN_VALUE : location.getMethodName(), eventMsg);
 		event.getOperation().setSeverity(level);
 		event.setTag(jev.getThreadName());
-		event.getOperation().setResource(jev.getLoggerName());
-		event.setLocation(location.getFileName() + ":" + location.getLineNumber());
-		event.setSource(logger.getConfiguration().getSourceFactory().newSource(jev.getLoggerName()));
+		event.getOperation().setResource(Utils.isEmpty(loggerName) ? UNKNOWN_VALUE : loggerName);
+		if (location != null) {
+			event.setLocation(location.getFileName() + ":" + location.getLineNumber());
+		}
+		event.setSource(logger.getConfiguration().getSourceFactory().newSource(loggerName));
 
 		for (Map.Entry<String, String> entry : attrs.entrySet()) {
 			String key = entry.getKey();
@@ -275,9 +284,9 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 			} else if (key.equalsIgnoreCase(PARAM_END_TIME_LABEL)) {
 				endTime = Long.parseLong(value);
 			} else if (key.equalsIgnoreCase(PARAM_REASON_CODE_LABEL)) {
-				rcode = Integer.parseInt(value);
+				rCode = Integer.parseInt(value);
 			} else if (key.equalsIgnoreCase(PARAM_COMP_CODE_LABEL)) {
-				ccode = OpCompCode.valueOf(value);
+				cCode = OpCompCode.valueOf(value);
 			} else if (key.equalsIgnoreCase(PARAM_SEVERITY_LABEL)) {
 				event.getOperation().setSeverity(OpLevel.valueOf(value));
 			} else if (key.equalsIgnoreCase(PARAM_OP_TYPE_LABEL)) {
@@ -303,7 +312,7 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 		endTime = endTime <= 0 ? (startTime + elapsedTimeUsec) : endTime;
 
 		event.start(startTime);
-		event.stop(ccode, rcode, ex, endTime);
+		event.stop(cCode, rCode, ex, endTime);
 		return event;
 	}
 
