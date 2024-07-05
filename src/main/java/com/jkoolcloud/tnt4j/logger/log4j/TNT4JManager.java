@@ -187,8 +187,9 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 			TrackingActivity activity = logger.getCurrentActivity();
 			TrackingEvent tev = processEventMessage(attrs, activity, event, eventMsg, ex);
 
-			boolean reportMetrics = activity.isNoop() && ((ex != null && metricsOnException)
-					|| ((lastReport - lastSnapshot) > (metricsFrequency * 1000)));
+			boolean reportMetrics = activity.isNoop() //
+					&& ((ex != null && metricsOnException) //
+							|| ((lastReport - lastSnapshot) > (metricsFrequency * 1_000)));
 
 			if (reportMetrics) {
 				String loggerName = event.getLoggerName();
@@ -257,7 +258,7 @@ public class TNT4JManager extends AbstractManager implements AppenderConstants {
 			String eventMsg, Throwable ex) {
 		int rCode = 0;
 		long elapsedTimeUsec = getUsecsSinceLastEvent();
-		long evTime = jev.getTimeMillis() * 1000; // convert to usec
+		long evTime = jev.getTimeMillis() * 1_000; // convert to usec
 		long startTime = 0, endTime = 0;
 		Snapshot snapshot = null;
 
